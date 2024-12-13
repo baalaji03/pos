@@ -26,7 +26,7 @@ const token = jwt.sign(
   { expiresIn: "120s" }
 );
 
-app.get("/api/v1/auth/login", (req, res) => {
+app.post("/api/v1/auth/login", (req, res) => {
   res.status(200).json({
     status: "SUCCESS",
     statucCode: 200,
