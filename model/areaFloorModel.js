@@ -14,5 +14,5 @@ const areaFloorSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Areafloor = mongoose.model("areafloor", areaFloorSchema);
-export default Areafloor;
+const areafloor = mongoose.model("areafloor", areaFloorSchema);
+export default areafloor;

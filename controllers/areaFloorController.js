@@ -1,4 +1,4 @@
-import Areafloor from "../model/areaFloorModel.js";
+import areafloor from "../model/areaFloorModel.js";
 
 /**
  * @description API endpoint to create a new area floor
@@ -14,7 +14,7 @@ export const areaFloorCreate = async (req, res) => {
 
   try {
     // Creating a new area floor instance
-    const newAreaFloor = new Areafloor({ areaFloorName, Description });
+    const newAreaFloor = new areafloor({ areaFloorName, Description });
 
     // Saving the new area floor instance to the database
     const result = await newAreaFloor.save();
@@ -48,7 +48,7 @@ export const areaFloorCreate = async (req, res) => {
 
 export const areaFloorget = async (req, res) => {
   try {
-    const result = await Areafloor.find();
+    const result = await areafloor.find();
 
     res.json({
       status: "Success",
@@ -87,7 +87,7 @@ export const areaFloorupdate = async (req, res) => {
       Description,
     });
 
-    const updatedDAta = await Areafloor.findById(id);
+    const updatedDAta = await areafloor.findById(id);
 
     res.json({
       status: "Successfully updated",
@@ -118,7 +118,7 @@ export const areaFloorupdate = async (req, res) => {
 export const areaFloordelete = async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await Areafloor.findByIdAndDelete(id);
+    const result = await areafloor.findByIdAndDelete(id);
 
     res.json({
       status: "Deleted Successfully",
