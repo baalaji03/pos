@@ -32,10 +32,10 @@ const token = jwt.sign(
 );
 
 
-app.use("/api/unit", route);
-app.use("/api/categories", categoryRoute);
-app.use("/api/printer", printerRoute);
-app.use("/api/kitchen", kitchenRoute);
+app.use("/api/v1", route);
+app.use("/api/v1", categoryRoute);
+app.use("/api/v1", printerRoute);
+app.use("/api/v1", kitchenRoute);
 
 
 

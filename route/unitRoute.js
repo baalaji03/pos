@@ -2,9 +2,7 @@ import { createIngredient, getIngredient ,updateIngredient,deleteIngredient , ge
 import express, { Router } from "express"
 const route = express.Router();
 
-route.get("/units", (req, res) => {
-  res.send("Units route is working");
-});
+
 
 route.post("/createingredient", createIngredient);
 route.get("/getingredient", getIngredient);
