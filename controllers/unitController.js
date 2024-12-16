@@ -11,7 +11,7 @@ export const createIngredient = async (req, res) => {
       statucCode: 200,
       error: null,
       success: true,
-      result,
+      result
     });
   } catch (error) {
     console.log(error);

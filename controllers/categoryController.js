@@ -7,14 +7,13 @@ export const createCategory = async (req, res) => {
     const { Category, desc, addedBy } = req.body;
 
     const newCategory = new category({ Category, desc, addedBy });
-    const result = newCategory.save();
-
+    const result = await newCategory.save();
     res.json({
       status: "Success",
       statucCode: 200,
       error: null,
       success: true,
-      result,
+      result
     });
   } catch (error) {
     console.log(error);
@@ -31,7 +30,7 @@ export const getCategory = async (req, res) => {
           statucCode: 200,
           error: null,
           success: true,
-          result,
+          result
         });
         
     } catch (error) {
@@ -58,7 +57,7 @@ export const updateCategory = async (req, res) => {
           statucCode: 200,
           error: null,
           success: true,
-          result,
+          result
         });
 
     } catch (error) {
@@ -80,7 +79,7 @@ export const deleteCategory = async (req, res) => {
           statucCode: 200,
           error: null,
           success: true,
-          result,
+          result
         });
          
 
