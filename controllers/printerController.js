@@ -70,7 +70,7 @@ export const updatePrinter = async (req, res) => {
 export const deletePrinter = async (req, res) => {
     try {
         const { id } = req.params
-        const deleted = await Printer.findByIdAndDelete(id )
+        const result = await Printer.findByIdAndDelete(id )
         
         res.json({
           status: "deleted Success",
@@ -86,4 +86,24 @@ export const deletePrinter = async (req, res) => {
         
         
     }
+}
+
+//getbyID(printer)
+
+export const getprinterById = async (req, res) => {
+  try {
+    
+    const { id } = req.params
+    const result = await Printer.findById(id);
+    res.json({
+      status: "Success",
+      statucCode: 200,
+      error: null,
+      success: true,
+      result,
+    });
+  } catch (error) {
+    
+    console.log(error)
+  }
 }
