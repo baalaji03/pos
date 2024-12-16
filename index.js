@@ -6,6 +6,7 @@ import route from "./route/unitRoute.js";
 import categoryRoute from "./route/categoryRoute.js";
 import printerRoute from "./route/printerRoute.js";
 import kitchenRoute from "./route/kitchenRoute.js";
+import arearoute from "./route/areaFloorRoute.js";
 import dotenv from "dotenv";
 import connectDB from "./database/config.js";
 
@@ -36,6 +37,8 @@ app.use("/api/v1", route);
 app.use("/api/v1", categoryRoute);
 app.use("/api/v1", printerRoute);
 app.use("/api/v1", kitchenRoute);
+app.use("/api/v1",arearoute)
+
 
 
 
