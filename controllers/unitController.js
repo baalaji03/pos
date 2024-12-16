@@ -7,7 +7,7 @@ export const createIngredient = async (req, res) => {
     const Items = new Unit({ unitName, desc });
     const result = await Items.save();
     res.json({
-      status: "Added",
+      status: "Success",
       statucCode: 200,
       error: null,
       success: true,
@@ -21,8 +21,14 @@ export const createIngredient = async (req, res) => {
 //GET (unit)
 export const getIngredient = async (req, res) => {
   try {
-    const get = await Unit.find();
-    res.json({ message: "success", get });
+    const result = await Unit.find();
+    res.json({
+      status: "Success",
+      statucCode: 200,
+      error: null,
+      success: true,
+      result,
+    });
   } catch (error) {
     console.log(error);
   }
@@ -33,12 +39,20 @@ export const updateIngredient = async (req, res) => {
   try {
     const { id } = req.params;
     const { unitName, desc } = req.body;
-    const update = await Unit.findByIdAndUpdate(
+    const result = await Unit.findByIdAndUpdate(
       id,
       { unitName, desc },
       { new: true }
     );
-    res.status(200).json({ message: "Updated", update });
+    res
+      .status(200)
+      .json({
+        status: "Success",
+        statucCode: 200,
+        error: null,
+        success: true,
+        result,
+      });
   } catch (error) {
     console.log(error);
   }
@@ -51,11 +65,11 @@ export const deleteIngredient = async (req, res) => {
     const deleted = await Unit.findByIdAndDelete(id);
     {
       res.json({
-        status: "delelted Successfull",
+        status: "Success",
         statucCode: 200,
         error: null,
         success: true,
-        deleted,
+        deleted
       });
     }
   } catch (error) {
@@ -70,7 +84,10 @@ export const getUnitById = async (req, res) => {
     const { id } = req.params;
     const result = await Unit.findById(id);
     res.json({
-      message: "success",
+      status: "Success",
+      statucCode: 200,
+      error: null,
+      success: true,
       result,
     });
   } catch (error) {

@@ -36,8 +36,11 @@ export const getKitcken = async (req, res) => {
     const result = await kitchen.find();
 
     res.json({
-      message: "success",
-      result,
+      status: "Success",
+      statucCode: 200,
+      error: null,
+      success: true,
+      result
     });
   } catch (error) {
     console.log(error);
@@ -58,9 +61,11 @@ export const updateKitcken = async (req, res) => {
     });
 
     res.json({
-      status: 200,
-      message: "Updated",
-      result,
+      status: "Success",
+      statucCode: 200,
+      error: null,
+      success: true,
+      result
     });
   } catch (error) {
     console.log(error);
@@ -75,10 +80,11 @@ export const deleteKitcken = async (req, res) => {
 
     const result = await kitchen.findByIdAndDelete(id);
     res.json({
-      status: "delelted Successfull",
+      status: "Success",
       statucCode: 200,
       error: null,
       success: true,
+      result
     });
   } catch (error) {
     console.log(error);

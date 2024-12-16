@@ -10,7 +10,7 @@ export const createCategory = async (req, res) => {
     const result = newCategory.save();
 
     res.json({
-      status: "Created Successfully",
+      status: "Success",
       statucCode: 200,
       error: null,
       success: true,
@@ -27,9 +27,12 @@ export const getCategory = async (req, res) => {
     try {
         const result = await category.find();
         res.json({
-            message: "Success",
-            result 
-        })
+          status: "Success",
+          statucCode: 200,
+          error: null,
+          success: true,
+          result,
+        });
         
     } catch (error) {
         console.log(error);
@@ -51,9 +54,11 @@ export const updateCategory = async (req, res) => {
           addedBy
         });
         res.json({
-          status: 200,
-          message: "Updated",
-          result
+          status: "Success",
+          statucCode: 200,
+          error: null,
+          success: true,
+          result,
         });
 
     } catch (error) {
@@ -71,11 +76,11 @@ export const deleteCategory = async (req, res) => {
         const result = await category.findByIdAndDelete(id)
 
         res.json({
-          status: "delelted Successfull",
+          status: "deleted Successfully",
           statucCode: 200,
           error: null,
-            success: true,
-          result
+          success: true,
+          result,
         });
          
 
@@ -85,4 +90,3 @@ export const deleteCategory = async (req, res) => {
     }
 }
 
-// elete(category)

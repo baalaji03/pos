@@ -54,8 +54,10 @@ export const updatePrinter = async (req, res) => {
       
     );
     res.json({
-      status: 200,
-      message: "Updated",
+      status: "Success",
+      statucCode: 200,
+      error: null,
+      success: true,
       result,
     });
   } catch (error) {
@@ -71,11 +73,11 @@ export const deletePrinter = async (req, res) => {
         const deleted = await Printer.findByIdAndDelete(id )
         
         res.json({
-          status: "delelted Successfull",
+          status: "deleted Success",
           statucCode: 200,
           error: null,
-          success: true
-          
+          success: true,
+          result,
         });
 
 
