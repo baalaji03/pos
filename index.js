@@ -2,7 +2,14 @@ import express from "express";
 import cors from "cors";
 import jwt from "jsonwebtoken";
 import bodyParser from "body-parser";
-import { sign } from "crypto";
+import route from "./route/unitRoute.js";
+import categoryRoute from "./route/categoryRoute.js";
+import printerRoute from "./route/printerRoute.js";
+import kitchenRoute from "./route/kitchenRoute.js";
+import dotenv from "dotenv";
+import connectDB from "./database/config.js";
+
+dotenv.config();
 
 const port = 8000;
 const app = express();
@@ -12,13 +19,11 @@ app.use(
     origin: "*",
     methods: "GET, POST, PUT, DELETE",
     allowedHeaders: "Content-Type, Authorization",
-    credentials: true,
   })
 );
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());
 
 const token = jwt.sign(
   { id: "001", role: "admin", username: "hari bujii" },
@@ -26,9 +31,19 @@ const token = jwt.sign(
   { expiresIn: "120s" }
 );
 
+
+app.use("/api/unit", route);
+app.use("/api/categories", categoryRoute);
+app.use("/api/printer", printerRoute);
+app.use("/api/kitchen", kitchenRoute);
+
+
+
+connectDB();
+
 app.post("/api/v1/auth/login", (req, res) => {
   res.status(200).json({
-    status: "SUCCESS",
+    status: "Login Successfully",
     statucCode: 200,
     data: {
       token: token,
