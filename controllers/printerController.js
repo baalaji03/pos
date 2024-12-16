@@ -77,7 +77,7 @@ export const deletePrinter = async (req, res) => {
           statucCode: 200,
           error: null,
           success: true,
-          result,
+          result
         });
 
 

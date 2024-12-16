@@ -90,3 +90,21 @@ export const deleteKitcken = async (req, res) => {
     console.log(error);
   }
 };
+
+// getbyID(kitcken)
+
+export const getKitckenById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await kitchen.findById(id);
+    res.json({
+      status: "Success",
+      statucCode: 200,
+      error: null,
+      success: true,
+      result
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
