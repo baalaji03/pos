@@ -89,3 +89,22 @@ export const deleteCategory = async (req, res) => {
     }
 }
 
+//getbyID(category)
+
+export const getcategoryById = async (req, res) => {
+  try {
+    
+    const { id } = req.params
+    const result = await category.findById(id)
+    res.json({
+      status: "Success",
+      statucCode: 200,
+      error: null,
+      success: true,
+      result,
+    });
+  } catch (error) {
+    
+    console.log(error)
+  }
+}
