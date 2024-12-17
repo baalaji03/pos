@@ -31,8 +31,24 @@ app.use(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const token = jwt.sign(
-  { id: "001", role: "admin", username: "hari bujii" },
+const Token = jwt.sign(
+  { role: "admin", username: "hari", password: "admin@123" },
+  "secret",
+  { expiresIn: "120s" }
+);
+
+const users = [
+  { role: "admin", username: "admin@gmail.com", password: "admin@123" }
+];
+  
+
+const waiterToken = jwt.sign(
+  { role: "waiter", username: " waiter@gmail.com",password:"waiter@123" },
+  "secret",
+  { expiresIn: "120s" }
+);
+const KotToken = jwt.sign(
+  { role: "Kot", username: "kot@gmail.com",password:"kot@123" },
   "secret",
   { expiresIn: "120s" }
 );
@@ -55,16 +71,64 @@ app.use("/api/v1", currencyRoute);
 connectDB();
 
 app.post("/api/v1/auth/login", (req, res) => {
-  res.status(200).json({
-    status: "Login Successfully",
-    statucCode: 200,
-    data: {
-      token: token,
-    },
-    error: null,
-    success: true,
-  });
-});
+  const { username, password } = req.body;
+  
+const users = [
+  { role: "admin", username: "admin@gmail.com", password: "admin@123" },
+  { role: "waiter", username: "waiter@gmail.com", password: "waiter@123" },
+  { role:"kot" , username:"kot@gmail.com",password:"kot@123"}
+];
+try{
+ const user = users.find(
+      (u) => u.username === username && u.password === password
+    );
+
+    if (!user) {
+      return res.status(400).json({
+        status: 400,
+        message: "Invalid username or password",
+        success: false,
+      });
+    }
+
+    // Generate JWT token for the valid user
+    const token = jwt.sign(
+      { role: user.role, username: user.username },
+      process.env.JWT_SECRET || "secret", // Use a secure JWT secret from environment
+      { expiresIn: "120s" }
+    );
+
+    // Return the response
+    res.json({
+      status: 200,
+      message: "Login Successfully",
+      statusCode: 200,
+      data: {
+        token,
+      },
+      error: null,
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+    
+  }
+
+
+})
+
+
+// app.post("/api/v1/auth/login", (req, res) => {
+//   res.status(200).json({
+//     status: "Login Successfully",
+//     statucCode: 200,
+//     data: {
+//       token: Token,
+//     },
+//     error: null,
+//     success: true,
+//   });
+// });
 
 app.listen(port, () => {
   console.log(`server is running on port ${port}`);
