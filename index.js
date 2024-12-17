@@ -118,6 +118,68 @@ try{
 })
 
 
+app.post("/api/v1/permissions", (req, res) => {
+  try {
+    // Step 1: Extract the Bearer token from the header
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({
+        status: 401,
+        message: "Authorization header missing or malformed",
+        success: false,
+      });
+    }
+
+    const token = authHeader.split(" ")[1]; // Get the token part
+
+    // Step 2: Decode the JWT token
+    jwt.verify(token, process.env.JWT_SECRET || "secret", (err, decoded) => {
+      if (err) {
+        return res.status(403).json({
+          status: 403,
+          message: "Invalid or expired token",
+          success: false,
+        });
+      }
+
+      const { username, password } = decoded;
+
+      // Step 3: Compare decoded data with database
+      const user = users.find(
+        (u) => u.username === username && u.password === password
+      );
+
+      if (!user) {
+        return res.status(400).json({
+          status: 400,
+          message: "Invalid credentials in token",
+          success: false,
+        });
+      }
+
+      // Step 4: Respond with success if credentials are valid
+      res.json({
+        status: 200,
+        message: "Token validated successfully",
+        success: true,
+        data: {
+          role: user.role,
+          username: user.username,
+        },
+      });
+    });
+  } catch (error) {
+    console.error("Error during token validation:", error);
+    res.status(500).json({
+      status: 500,
+      message: "Internal server error",
+      success: false,
+    });
+  }
+});
+
+
 // app.post("/api/v1/auth/login", (req, res) => {
 //   res.status(200).json({
 //     status: "Login Successfully",
