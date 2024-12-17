@@ -19,7 +19,7 @@ import Role from "./model/rolePermissionModel.js";
 dotenv.config();
 
 const port = 8000;
-const host = "192.168.0.129";
+
 const app = express();
 
 app.use(
@@ -83,8 +83,6 @@ function convertMapToObject(map) {
   // Return empty object if map is not valid
   return {};
 }
-
-
 
 app.post("/api/v1/auth/login", (req, res) => {
   const { username, password } = req.body;
@@ -164,14 +162,11 @@ app.get("/api/v1/permissions", (req, res) => {
         console.log("Decoded role:", role);
 
         const dbRole = await Role.findOne({ role_name: role }).lean();
-        
 
-         const permissions = dbRole.permissions
-           ? convertMapToObject(dbRole.permissions)
-           : {};
-        
-        
-        
+        const permissions = dbRole.permissions
+          ? convertMapToObject(dbRole.permissions)
+          : {};
+
         console.log("Database Role:", dbRole);
         // Step 4: Respond with success if credentials are valid
         res.json({
@@ -182,7 +177,7 @@ app.get("/api/v1/permissions", (req, res) => {
             role_name: dbRole.role_name,
             description: dbRole.description,
             permissions: permissions,
-          }
+          },
         });
       }
     );
@@ -208,9 +203,6 @@ app.get("/api/v1/permissions", (req, res) => {
 //   });
 // });
 
-
-
-
 app.listen(port, host, () => {
-  console.log(`server is running on port ${host} :${port}`);
+  console.log(`server is running on port ${port}`);
 });
