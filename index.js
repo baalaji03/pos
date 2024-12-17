@@ -203,6 +203,6 @@ app.get("/api/v1/permissions", (req, res) => {
 //   });
 // });
 
-app.listen(port, host, () => {
+app.listen(port, () => {
   console.log(`server is running on port ${port}`);
 });
