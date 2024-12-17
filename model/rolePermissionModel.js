@@ -11,14 +11,13 @@ const permissionSchema = new mongoose.Schema(
   { _id: false } // No need for an _id in permission schema
 );
 
-// Schema for a module with nested permissions and children
 const moduleSchema = new mongoose.Schema(
   {
     access: { type: Boolean, default: false },
     children: {
-      type: Map, // A flexible map for dynamic keys
-      of: permissionSchema, // Each child follows the permissionSchema
-      default: {}, // Default is an empty object
+      type: Map,
+      of: permissionSchema,
+      default: {},
     },
   },
   { _id: false } // No need for an _id in module schema
@@ -27,11 +26,12 @@ const moduleSchema = new mongoose.Schema(
 // Main Role Schema
 const roleSchema = new mongoose.Schema(
   {
-    role_name: { type: String, required: true },
+    role_name: { type: String, required: true, unique: true },
     description: { type: String, required: true },
     permissions: {
       type: Map, // Use a dynamic map to support any top-level permission key
-      of: moduleSchema, // Each module will follow the moduleSchema
+      of: moduleSchema,
+      // Each module will follow the moduleSchema
       default: {}, // Default is an empty object
     },
   },

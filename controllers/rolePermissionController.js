@@ -45,3 +45,29 @@ import Role from "../model/rolePermissionModel.js";
 };
 
 export { createRolePermission };
+
+
+export const getRolePermission = async (req, res) => {
+  const { id } = req.params
+  try {
+
+    const result = await Role.find()
+
+    res.json({
+      status: "Created Successfully",
+      statusCode: 201,
+      error: null,
+      success: true,
+      result
+    });
+    
+  } catch (error) {
+    res.status(500).json({
+      status: "Error",
+      statusCode: 500,
+      error: error.message,
+      success: false,
+      result: null,
+    });
+  }
+}
