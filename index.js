@@ -9,6 +9,9 @@ import kitchenRoute from "./route/kitchenRoute.js";
 import arearoute from "./route/areaFloorRoute.js";
 import tableRoute from "./route/tableRoute.js";
 import roleRoute from "./route/rolePermissionRoute.js";
+import settingRoute from "./route/settingsRoute.js";
+import counterRoute from "./route/settingCounterRoute.js";
+import currencyRoute from "./route/settingCurrencyRoute.js";
 import dotenv from "dotenv";
 import connectDB from "./database/config.js";
 
@@ -41,7 +44,10 @@ app.use("/api/v1", printerRoute);
 app.use("/api/v1", kitchenRoute);
 app.use("/api/v1",arearoute)
 app.use("/api/v1", tableRoute);
-app.use("/api/v1",roleRoute)
+app.use("/api/v1", roleRoute)
+app.use("/api/v1", settingRoute);
+app.use("/api/v1", counterRoute);
+app.use("/api/v1", currencyRoute);
 
 
 

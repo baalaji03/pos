@@ -1,117 +1,38 @@
 import mongoose from "mongoose";
 
+// Schema for individual permissions (view, create, edit, delete)
 const permissionSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  checked: {
-    type: Boolean,
-    required: true,
-  },
+  view: { type: Boolean, default: false },
+  create: { type: Boolean, default: false },
+  edit: { type: Boolean, default: false },
+  delete: { type: Boolean, default: false },
 });
 
-const subSectionSchema = new mongoose.Schema({
-  data: {
-    type: [permissionSchema], // Array of permissions
-    required: true,
-  },
-  title: {
-    type: String,
-    required: true,
-  },
-});
-
-const sectionSchema = new mongoose.Schema({
-  data: {
-    type: [subSectionSchema], // Array of sub-sections
-    required: true,
-  },
-});
-
-const settingsSchema = new mongoose.Schema({
-  data: {
-    type: [subSectionSchema], // Array of sub-sections
-    required: true,
-  },
-});
-
+// Schema for a module with nested permissions and children
 const moduleSchema = new mongoose.Schema({
-  dashboard: {
-    type: [permissionSchema],
-    default: [],
-  },
-  company: {
-    type: [permissionSchema],
-    default: [],
-  },
-  plan: {
-    type: [permissionSchema],
-    default: [],
-  },
-  coupons: {
-    type: [permissionSchema],
-    default: [],
-  },
-  order: {
-    type: [permissionSchema],
-    default: [],
-  },
-  mail: {
-    type: [permissionSchema],
-    default: [],
-  },
-  user_management: {
-    type: [permissionSchema],
-    default: [],
-  },
-  review_management: {
-    type: [permissionSchema],
-    default: [],
-  },
-  ticket: {
-    type: [permissionSchema],
-    default: [],
-  },
-  plan_Request: {
-    type: [permissionSchema],
-    default: [],
-  },
-  order_Confirmation: {
-    type: [permissionSchema],
-    default: [],
-  },
-  leonex_Family: {
-    type: [sectionSchema], // Nested sections for Leonex Family
-    default: [],
-  },
-  referral_Program: {
-    type: [sectionSchema], // Nested sections for Referral Program
-    default: [],
-  },
-  settings: {
-    type: [settingsSchema], // Nested sections for settings
-    default: [],
+  access: { type: Boolean, default: false },
+  children: {
+    type: Map, // A flexible map for dynamic keys
+    of: permissionSchema, // Each child follows the permissionSchema
+    default: {}, // Default is an empty object
   },
 });
 
+// Main Role Schema
 const roleSchema = new mongoose.Schema(
   {
-    role_name: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
+    role_name: { type: String, required: true },
+    description: { type: String, required: true },
     permissions: {
-      type: moduleSchema, // Define all permissions here
-      required: true,
+      // Each module has access control and nested children permissions
+      dashboard: { type: moduleSchema, default: {} },
+      company: { type: moduleSchema, default: {} },
+      settings: { type: moduleSchema, default: {} },
     },
   },
-  { timestamps: true }
+  { timestamps: true } // Automatically adds createdAt and updatedAt
 );
 
+// Create and export the Role model
 const Role = mongoose.model("Role", roleSchema);
 export default Role;

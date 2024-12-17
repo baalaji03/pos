@@ -49,6 +49,82 @@ const settingsSchema = new mongoose.Schema(
       enum: [],
       required: true,
     },
+    defaultOrderType: {
+      type: String,
+      enum: ["Dine In ", "Take Away ", "Delivery"],
+      required: true,
+    },
+    
+    defaultDeliveryPartner: {
+      type: String,
+      enum: ["Zomato"],
+      required: true,
+    },
+    defaultWaiter: {
+      type: String,
+      required: true,
+    },
+    defaultCustomer: {
+      type: String,
+      required: true,
+    },
+    defaultPaymentMethod: {
+      type: String,
+      enum: ["Zomato"],
+      required: true,
+    },
+    placeOrderToolTip: {
+      type: String,
+      required: true,
+    },
+    foodMenuToolTip: {
+      type: String,
+      required: true,
+    },
+    smsSentAuto: {
+      type: String,
+    },
+    prePostPayment: {
+      type: String,
+      enum: ["Post Payment", "Pre Payment"],
+      required: true,
+    },
+    serviceCharge: {
+      type: Number,
+      required: true,
+    },
+    deliveryCharge: {
+      type: Number,
+      required: true,
+    },
+    activeLoginButton: {
+      type: String,
+      enum: ["Pin", "Username & Password"],
+      required: true,
+    },
+    loginOption: {
+      type: String,
+      enum: ["Pin", "Username & Password"],
+      required: true,
+    },
+    loyaltyPoint: {
+      type: String,
+      enum: ["Enable", "Disable"],
+      required: true,
+    },
+    minimumLoyaltyPointRedeem: {
+      type: Number,
+      required: true,
+    },
+    loyaltyPointRate: {
+      type: Number,
+      required: true,
+    },
+    exportDailySales: {
+      type: String,
+      enum: ["Enable", "Disable"],
+      required: true,
+    },
   },
   { timestamps: true }
 );
