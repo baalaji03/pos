@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 const taxFieldSchema = new mongoose.Schema({
   Name: {
     type: String,
@@ -11,7 +12,7 @@ const taxFieldSchema = new mongoose.Schema({
 
 const taxSettingsSchema = new mongoose.Schema(
   {
-      Tax: {
+    Tax: {
       type: Boolean,
       required: true,
       default: false,
@@ -45,3 +46,7 @@ const taxSettingsSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+const taxSetting = mongoose.model("TaxSettings", taxSettingsSchema);
+
+export default taxSetting;

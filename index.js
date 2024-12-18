@@ -12,9 +12,12 @@ import roleRoute from "./route/rolePermissionRoute.js";
 import settingRoute from "./route/settingsRoute.js";
 import counterRoute from "./route/settingCounterRoute.js";
 import currencyRoute from "./route/settingCurrencyRoute.js";
+import selfRoute from "./route/settingSelfRoute.js";
+import paymentRoute from "./route/settingPaymentRoute.js";
 import dotenv from "dotenv";
 import connectDB from "./database/config.js";
 import Role from "./model/rolePermissionModel.js";
+import TaxRoute from "./route/settingTaxRoute.js";
 
 dotenv.config();
 
@@ -64,6 +67,9 @@ app.use("/api/v1", roleRoute);
 app.use("/api/v1", settingRoute);
 app.use("/api/v1", counterRoute);
 app.use("/api/v1", currencyRoute);
+app.use("/api/v1", selfRoute);
+app.use("/api/v1", TaxRoute);
+app.use("/api/v1", paymentRoute);
 
 connectDB();
 
@@ -206,3 +212,4 @@ app.get("/api/v1/permissions", (req, res) => {
 app.listen(port, () => {
   console.log(`server is running on port ${port}`);
 });
+
