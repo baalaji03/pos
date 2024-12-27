@@ -20,8 +20,8 @@ export const areaFloorCreate = async (req, res) => {
     const result = await newAreaFloor.save();
 
     // Sending a success response
-    return res.json({
-      status: "Successfully Created",
+     res.json({
+      status: "Created Successfully",
       statusCode: 200,
       error: null,
       success: true,

@@ -24,7 +24,7 @@ export const createCategory = async (req, res) => {
 
 export const getCategory = async (req, res) => {
     try {
-        const result = await category.find();
+        const result = await category;
         res.json({
           status: "Success",
           statucCode: 200,

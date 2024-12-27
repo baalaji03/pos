@@ -24,7 +24,7 @@ import Role from "../model/rolePermissionModel.js";
 
     // Create new Role
     const newRole = new Role({ role_name, description, permissions });
-    const result = await newRole.save();
+    const result = await newRole.save( );
 
     res.status(201).json({
       status: "Created Successfully",

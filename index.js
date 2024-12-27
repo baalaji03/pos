@@ -2,26 +2,18 @@ import express from "express";
 import cors from "cors";
 import jwt from "jsonwebtoken";
 import bodyParser from "body-parser";
-import route from "./route/unitRoute.js";
-import categoryRoute from "./route/categoryRoute.js";
-import printerRoute from "./route/printerRoute.js";
-import kitchenRoute from "./route/kitchenRoute.js";
-import arearoute from "./route/areaFloorRoute.js";
-import tableRoute from "./route/tableRoute.js";
-import roleRoute from "./route/rolePermissionRoute.js";
-import settingRoute from "./route/settingsRoute.js";
-import counterRoute from "./route/settingCounterRoute.js";
-import currencyRoute from "./route/settingCurrencyRoute.js";
-import selfRoute from "./route/settingSelfRoute.js";
-import paymentRoute from "./route/settingPaymentRoute.js";
+import Router from "./route/indexRoute.js";
 import dotenv from "dotenv";
 import connectDB from "./database/config.js";
 import Role from "./model/rolePermissionModel.js";
-import TaxRoute from "./route/settingTaxRoute.js";
+import multer from "multer";
+
+
 
 dotenv.config();
 
 const port = 8000;
+const host = "192.168.0.129";
 
 const app = express();
 
@@ -36,40 +28,13 @@ app.use(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const Token = jwt.sign(
-  { role: "admin", username: "hari", password: "admin@123" },
-  "secret",
-  { expiresIn: "120s" }
-);
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
-const users = [
-  { role: "admin", username: "admin@gmail.com", password: "admin@123" },
-];
 
-const waiterToken = jwt.sign(
-  { role: "waiter", username: " waiter@gmail.com", password: "waiter@123" },
-  "secret",
-  { expiresIn: "120s" }
-);
-const KotToken = jwt.sign(
-  { role: "Kot", username: "kot@gmail.com", password: "kot@123" },
-  "secret",
-  { expiresIn: "120s" }
-);
+app.use("/api/v1", Router);
 
-app.use("/api/v1", route);
-app.use("/api/v1", categoryRoute);
-app.use("/api/v1", printerRoute);
-app.use("/api/v1", kitchenRoute);
-app.use("/api/v1", arearoute);
-app.use("/api/v1", tableRoute);
-app.use("/api/v1", roleRoute);
-app.use("/api/v1", settingRoute);
-app.use("/api/v1", counterRoute);
-app.use("/api/v1", currencyRoute);
-app.use("/api/v1", selfRoute);
-app.use("/api/v1", TaxRoute);
-app.use("/api/v1", paymentRoute);
+
 
 connectDB();
 
@@ -89,6 +54,8 @@ function convertMapToObject(map) {
   // Return empty object if map is not valid
   return {};
 }
+
+
 
 app.post("/api/v1/auth/login", (req, res) => {
   const { username, password } = req.body;
@@ -176,7 +143,7 @@ app.get("/api/v1/permissions", (req, res) => {
         console.log("Database Role:", dbRole);
         // Step 4: Respond with success if credentials are valid
         res.json({
-          status: 200,
+          status: 200, 
           message: "Token validated successfully",
           success: true,
           data: {
@@ -210,6 +177,5 @@ app.get("/api/v1/permissions", (req, res) => {
 // });
 
 app.listen(port, () => {
-  console.log(`server is running on port ${port}`);
+  console.log(`server is running on port ${host}:${port}`);
 });
-
