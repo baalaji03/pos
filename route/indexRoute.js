@@ -18,6 +18,7 @@ import userRoute from "./userRoute.js";
 import purchaseRoute from "./purchaseRoute.js";
 import ingredientRouter from "./ingredientRoute.js";
 import modifierRoute from "./modifierRoute.js";
+import foodMenuCategoryRoute from "./foodMenuCategoryRoute.js";
 
 const Router = express.Router();
  
@@ -39,6 +40,8 @@ Router.use("/user",userRoute)
 Router.use("/purchase", purchaseRoute);
 Router.use("/ingredient", ingredientRouter);
 Router.use("/modifier", modifierRoute);
+Router.use("/foodmenucategory", foodMenuCategoryRoute);
 
 export default Router;
+
  

@@ -22,6 +22,11 @@ const modifierSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User", // Reference to the User model
     },
+    costPerUnit: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "Ingredient", // Reference to the Ingredient model
+      
+    },
   },
 
   { timestamps: true }

@@ -67,6 +67,7 @@ export const getIngredient = async (req, res) => {
   const { id } = req.params;
 
   try {
+    
     const result = await Ingredient.find().populate("addedBy", "Username");
 
     res.json({

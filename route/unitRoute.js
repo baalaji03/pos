@@ -10,4 +10,4 @@ route.delete("/deleteingredient/:id", deleteIngredient);
 route.get("/getingredientbyid/:id",getUnitById);
 
 export default route;
-
+ 

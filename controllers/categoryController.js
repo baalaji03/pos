@@ -1,12 +1,12 @@
 // POST(category)
 
-import category from "../model/categoryModel.js";
+import Category from "../model/categoryModel.js";
 
 export const createCategory = async (req, res) => {
   try {
-    const { Category, desc, addedBy } = req.body;
+    const { category, desc, addedBy } = req.body;
 
-    const newCategory = new category({ Category, desc, addedBy });
+    const newCategory = new Category({ category, desc, addedBy });
     const result = await newCategory.save();
     res.json({
       status: "Success",
@@ -24,7 +24,7 @@ export const createCategory = async (req, res) => {
 
 export const getCategory = async (req, res) => {
     try {
-        const result = await category;
+        const result = await Category.find();
         res.json({
           status: "Success",
           statucCode: 200,
@@ -45,9 +45,9 @@ export const updateCategory = async (req, res) => {
     try {
         
         const { id } = req.params
-        const { Category, desc, addedBy } = req.body 
+        const { category, desc, addedBy } = req.body 
          
-        const result = await category.findByIdAndUpdate(id, {
+        const result = await Category.findByIdAndUpdate(id, {
           Category,
           desc,
           addedBy
@@ -72,7 +72,7 @@ export const deleteCategory = async (req, res) => {
     try {
         
         const { id } = req.params
-        const result = await category.findByIdAndDelete(id)
+        const result = await Category.findByIdAndDelete(id)
 
         res.json({
           status: "deleted Successfully",
@@ -95,7 +95,7 @@ export const getcategoryById = async (req, res) => {
   try {
     
     const { id } = req.params
-    const result = await category.findById(id)
+    const result = await Category.findById(id)
     res.json({
       status: "Success",
       statucCode: 200,

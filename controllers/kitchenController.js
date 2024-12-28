@@ -1,5 +1,5 @@
 import kitchen from "../model/kitchenModel.js";
-import category from "../model/categoryModel.js";
+import Category from "../model/categoryModel.js";
 
 // post(kitchen)
 export const createKitcken = async (req, res) => {

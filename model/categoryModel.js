@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const categorySchema = new mongoose.Schema(
   {
-    Category: {
+    category: {
       type: String,
       required: true,
     },
@@ -17,5 +17,5 @@ const categorySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const category = mongoose.model("category", categorySchema);
-export default category;
+const Category = mongoose.model("category", categorySchema);
+export default Category;
