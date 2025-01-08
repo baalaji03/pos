@@ -19,6 +19,18 @@ import purchaseRoute from "./purchaseRoute.js";
 import ingredientRouter from "./ingredientRoute.js";
 import modifierRoute from "./modifierRoute.js";
 import foodMenuCategoryRoute from "./foodMenuCategoryRoute.js";
+import foodMenuRoute from "./foodMenuRoute.js";
+import preFoodRoute from "./preFoodRoute.js";
+import stockRoute from "./stockRoute.js";
+import lowStockRoute from "./lowStockRoute.js";
+import adjustStockRoute from "./adjustStockRoute.js";
+import slowStockRoute from "./slowStockRoute.js";
+import productionRoute from "./productionRoute.js";
+import wasteRoute from "./wasteRoute.js";
+import attendanceRoute from "./attendanceRoute.js";
+import supplierRoute from "./supplierRoute.js";
+import purchasesRoute from "./purchasePurchaseRoute.js";
+
 
 const Router = express.Router();
  
@@ -41,6 +53,18 @@ Router.use("/purchase", purchaseRoute);
 Router.use("/ingredient", ingredientRouter);
 Router.use("/modifier", modifierRoute);
 Router.use("/foodmenucategory", foodMenuCategoryRoute);
+Router.use("/foodmenu", foodMenuRoute);
+Router.use("/prefood", preFoodRoute);
+Router.use("/stock", stockRoute);
+Router.use("/lowstock", lowStockRoute);
+Router.use("/adjuststock", adjustStockRoute);
+Router.use("/slowstock", slowStockRoute);
+Router.use("/production", productionRoute);
+Router.use("/waste", wasteRoute);
+Router.use("/attendance", attendanceRoute);
+Router.use("/supplier", supplierRoute);
+Router.use("/purchases", purchasesRoute);
+
 
 export default Router;
 

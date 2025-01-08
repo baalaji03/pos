@@ -1,7 +1,6 @@
 import User from "../model/userModel.js";
 import multer from "multer";
 
-
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
@@ -19,7 +18,7 @@ export const createUser = async (req, res) => {
     { name: "profilePicture", maxCount: 1 },
     { name: "govtProof", maxCount: 1 },
   ])(req, res, async (err) => {
-    if (err) {
+    if (err) {     
       return res.status(400).json({ error: err.message });
     }
 
@@ -28,7 +27,6 @@ export const createUser = async (req, res) => {
       Email,
       mobileNumber,
       Password,
-      confirmPassword,
       Role,
       enableLogin
     } = req.body;
@@ -47,7 +45,6 @@ export const createUser = async (req, res) => {
         Email,
         mobileNumber,
         Password,
-        confirmPassword,
         Role,
         profilePicture,
         govtProof,
@@ -127,7 +124,6 @@ export const updateUser = async (req, res) => {
       Email,
       mobileNumber,
       Password,
-      confirmPassword,
       Role,
       enableLogin
     } = req.body;
@@ -140,8 +136,7 @@ export const updateUser = async (req, res) => {
         Username,
         Email,
         mobileNumber,
-        Password,
-        confirmPassword,
+        Password, 
         Role,
         profilePicture,
         govtProof,
@@ -200,5 +195,6 @@ export const deleteuser = async (req, res) => {
         });
     }
 }
+ 
 
 
