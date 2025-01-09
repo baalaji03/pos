@@ -49,6 +49,8 @@ const SupplierSchema = new mongoose.Schema(
   }
 );
 
+SupplierSchema.index({ name: 1 });
+
 const Supplier = mongoose.model("Supplier", SupplierSchema);
 
 export default Supplier;

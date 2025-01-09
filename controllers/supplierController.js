@@ -3,8 +3,9 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
-const uuidNo = uuidv4();
 
+// Multer setup for image uploads
+const uuidNo = uuidv4();
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const uploadFolder = path.resolve("uploads", uuidNo);
@@ -24,6 +25,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+// Create a supplier
 export const createSupplier = async (req, res) => {
   upload.fields([{ name: "image", maxCount: 1 }])(req, res, async (err) => {
     if (err) {
@@ -33,24 +35,23 @@ export const createSupplier = async (req, res) => {
     try {
       const image = req.files?.image?.[0]?.path || null;
 
-      const supplier = {
+      const supplierData = {
         ...req.body,
-        image: image,
+        image,
       };
 
-      const newSupplier = new Supplier(supplier);
-
+      const newSupplier = new Supplier(supplierData);
       const result = await newSupplier.save();
 
-      res.json({
-        status: "Created Successfully",
+      res.status(200).json({
+        status: "Supplier created successfully",
         statusCode: 200,
         error: null,
         success: true,
         result,
       });
     } catch (error) {
-      return res.status(500).json({
+      res.status(500).json({
         status: "Error",
         statusCode: 500,
         error: error.message,
@@ -61,21 +62,72 @@ export const createSupplier = async (req, res) => {
   });
 };
 
-// before get create purchase from there we have to put due payment here
-
+// Get all suppliers
 export const getSupplier = async (req, res) => {
   try {
-    const result = await Supplier.find({}).select("balance");
+    const result = await Supplier.find().select(
+      "-companyAddress -billingAddress -sameAsCompanyAddress -description -image"
+    );
 
-    res.json({
-      status: "Created Successfully",
+    res.status(200).json({
+      status: "Fetched suppliers successfully",
       statusCode: 200,
       error: null,
       success: true,
       result,
     });
   } catch (error) {
-    return res.status(500).json({
+    res.status(500).json({
+      status: "Error",
+      statusCode: 500,
+      error: error.message,
+      success: false,
+      result: null,
+    });
+  }
+};
+
+export const updateSupplier = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await Supplier.updateOne({ _id: id }, req.body);
+
+    const result = await Supplier.findById({ _id: id });
+
+    res.status(200).json({
+      status: "Updated purchases successfully",
+      statusCode: 200,
+      error: null,
+      success: true,
+      result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Error",
+      statusCode: 500,
+      error: error.message,
+      success: false,
+      result: null,
+    });
+  }
+};
+
+export const deleteSupplier = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await Supplier.deleteOne({ _id: id });
+
+    res.status(200).json({
+      status: "Deleted purchases successfully",
+      statusCode: 200,
+      error: null,
+      success: true,
+      result,
+    });
+  } catch (error) {
+    res.status(500).json({
       status: "Error",
       statusCode: 500,
       error: error.message,

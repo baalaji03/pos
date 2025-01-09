@@ -60,8 +60,13 @@ PurchasesSchema.pre("save",  function (next) {
    
   next();
 });
+PurchasesSchema.pre("validate", function (next) {
+  if (this.paid > this.grandTotal) {
+    return next(new Error("Paid amount cannot exceed the grand total"));
+  }
+  next();
+});
 
 const purchasePurchase = mongoose.model("purchasess", PurchasesSchema);
 
 export default purchasePurchase;
-

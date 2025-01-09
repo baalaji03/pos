@@ -1,12 +1,17 @@
 import express from "express";
 
-import { createPurchases ,getPurchases} from "../controllers/purchasePurchaseContoller.js";
+import {
+  createPurchases,
+  getPurchases,
+  updatePurchases,
+  deletePurchases,
+} from "../controllers/purchasePurchaseContoller.js";
 const purchasesRoute = express.Router();
 
 purchasesRoute
     .post("/createpurchases", createPurchases)
-    .get("/getPurchases", getPurchases)
-//   .put("/updatewaste/:id", updateWaste)
-//   .delete("/deletewaste/:id", deleteWaste);
+    .get("/getpurchases", getPurchases)
+  .put("/updatepurchases/:id", updatePurchases )
+  .delete("/deletepurchases/:id", deletePurchases);
 
 export default purchasesRoute;
