@@ -130,9 +130,10 @@ export const deleteSupplier = async (req, res) => {
     res.status(500).json({
       status: "Error",
       statusCode: 500,
-      error: error.message,
+      error: error.message,   
       success: false,
       result: null,
     });
   }
 };
+ 

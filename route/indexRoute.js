@@ -30,6 +30,8 @@ import wasteRoute from "./wasteRoute.js";
 import attendanceRoute from "./attendanceRoute.js";
 import supplierRoute from "./supplierRoute.js";
 import purchasesRoute from "./purchasePurchaseRoute.js";
+import expenseItemRoute from "./expenseItemRoute.js";
+import expenseRoute from "./expenseRoute.js";
 
 
 const Router = express.Router();
@@ -64,6 +66,8 @@ Router.use("/waste", wasteRoute);
 Router.use("/attendance", attendanceRoute);
 Router.use("/supplier", supplierRoute);
 Router.use("/purchases", purchasesRoute);
+Router.use("/expenseitem", expenseItemRoute);
+Router.use("/expense", expenseRoute);
 
 
 export default Router;
