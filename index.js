@@ -8,12 +8,10 @@ import connectDB from "./database/config.js";
 import Role from "./model/rolePermissionModel.js";
 import multer from "multer";
 
-
-
 dotenv.config();
 
 const port = 8000;
-const host = "192.168.0.129";
+// const host = "192.168.0.129";
 
 const app = express();
 
@@ -31,10 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-
 app.use("/api/v1", Router);
-
-
 
 connectDB();
 
@@ -54,8 +49,6 @@ function convertMapToObject(map) {
   // Return empty object if map is not valid
   return {};
 }
-
-
 
 app.post("/api/v1/auth/login", (req, res) => {
   const { username, password } = req.body;
@@ -143,7 +136,7 @@ app.get("/api/v1/permissions", (req, res) => {
         console.log("Database Role:", dbRole);
         // Step 4: Respond with success if credentials are valid
         res.json({
-          status: 200, 
+          status: 200,
           message: "Token validated successfully",
           success: true,
           data: {
@@ -177,5 +170,5 @@ app.get("/api/v1/permissions", (req, res) => {
 // });
 
 app.listen(port, () => {
-  console.log(`server is running on port ${host}:${port}`);
+  console.log(`server is running on port :${port}`);
 });

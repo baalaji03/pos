@@ -32,6 +32,8 @@ import supplierRoute from "./supplierRoute.js";
 import purchasesRoute from "./purchasePurchaseRoute.js";
 import expenseItemRoute from "./expenseItemRoute.js";
 import expenseRoute from "./expenseRoute.js";
+import customerRoute from "./customerRoute.js";
+import promotionRoute from "./promotionRoute.js"; 
 
 
 const Router = express.Router();
@@ -68,6 +70,8 @@ Router.use("/supplier", supplierRoute);
 Router.use("/purchases", purchasesRoute);
 Router.use("/expenseitem", expenseItemRoute);
 Router.use("/expense", expenseRoute);
+Router.use("/customer", customerRoute);
+Router.use("/promotion", promotionRoute);
 
 
 export default Router;

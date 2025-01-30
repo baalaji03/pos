@@ -103,4 +103,12 @@ export const deleteWaste = async (req, res) => {
     });
   }
 };
+
+export const getById = async (req, res) => {
+  try {
+     
+  } catch (error) {
+    
+  }
+}
  
